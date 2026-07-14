@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Meu Universo Autoral</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coffee: {
+                            50: '#FDFBF7',  /* Fundo creme ultra claro */
+                            100: '#F5EBE0', /* Creme suave */
+                            200: '#E3D5CA', /* Bege médio */
+                            300: '#D5BDAF', /* Tom de transição */
+                            600: '#9C6644', /* Marrom médio */
+                            800: '#7F5539', /* Café escuro */
+                            950: '#4A3728', /* Chocolate */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #FDFBF7;
+            color: #4A3728;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Esconder barra de rolagem mas manter funcionalidade */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="flex flex-col h-screen max-w-md mx-auto shadow-2xl bg-coffee-50 border-x border-coffee-200 overflow-hidden">
+
+    <!-- HEADER (Topo) -->
+    <header class="bg-coffee-100 p-4 flex items-center justify-between border-b border-coffee-200 sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <div class="bg-coffee-800 p-1.5 rounded-full text-white">
+                <i data-lucide="coffee" class="w-5 h-5"></i>
+            </div>
+            <h1 class="font-bold text-lg text-coffee-950" id="app-title">Escritório Criativo</h1>
+        </div>
+        <button id="back-btn" class="hidden text-coffee-800 font-bold flex items-center gap-1 text-sm bg-coffee-200 px-3 py-1.5 rounded-full transition active:scale-95" onclick="goBack()">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar
+        </button>
+    </header>
+
+    <!-- ÁREA DE CONTEÚDO (Rolável) -->
+    <main class="flex-1 overflow-y-auto p-4 pb-24 no-scrollbar">
+        
+        <!-- TELA 1: CATEGORIAS PRINCIPAIS -->
+        <div id="screen-home" class="space-y-6">
+            <div class="text-center py-4">
+                <p class="text-xs text-coffee-600 italic">"Café quente, mente aberta. O que vamos criar hoje?"</p>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-4">
+                <!-- Personagens -->
+                <button onclick="openCategory('Personagem')" class="bg-coffee-100 p-5 rounded-[2rem] border border-coffee-200 text-left flex items-center justify-between hover:bg-coffee-200 transition active:scale-95 shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-coffee-800 p-3.5 rounded-2xl text-white">
+                            <i data-lucide="user" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-base text-coffee-950">Personagens</h3>
+                            <p class="text-xs text-coffee-600">Backstory, aparências e músicas</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="text-coffee-600"></i>
+                </button>
+
+                <!-- Mundo (Lore) -->
+                <button onclick="openCategory('Mundo')" class="bg-coffee-100 p-5 rounded-[2rem] border border-coffee-200 text-left flex items-center justify-between hover:bg-coffee-200 transition active:scale-95 shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-coffee-800 p-3.5 rounded-2xl text-white">
+                            <i data-lucide="globe" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-base text-coffee-950">Mundo (Lore)</h3>
+                            <p class="text-xs text-coffee-600">Economia, geografia e cultura</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="text-coffee-600"></i>
+                </button>
+
+                <!-- História -->
+                <button onclick="openCategory('História')" class="bg-coffee-100 p-5 rounded-[2rem] border border-coffee-200 text-left flex items-center justify-between hover:bg-coffee-200 transition active:scale-95 shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-coffee-800 p-3.5 rounded-2xl text-white">
+                            <i data-lucide="book-open" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-base text-coffee-950">História</h3>
+                            <p class="text-xs text-coffee-600">Capítulos, plots e anotações</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="text-coffee-600"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- TELA 2: SUBCATEGORIAS -->
+        <div id="screen-subcategories" class="hidden space-y-4">
+            <h2 class="text-lg font-bold text-coffee-950 mb-2" id="subcategory-title">Subcategorias</h2>
+            <div class="grid grid-cols-2 gap-3" id="subcategories-grid">
+                <!-- Inserido dinamicamente -->
+            </div>
+        </div>
+
+        <!-- TELA 3: EDITOR DE CONTEÚDO (Texto, Mídias e Links) -->
+        <div id="screen-editor" class="hidden space-y-4">
+            <h2 class="text-lg font-bold text-coffee-950" id="editor-title">Anotações</h2>
+            
+            <textarea id="editor-textarea" oninput="autoSave()" class="w-full h-80 p-4 rounded-3xl bg-coffee-100 border border-coffee-200 focus:outline-none focus:ring-2 focus:ring-coffee-600 text-coffee-950 placeholder-coffee-600 text-sm shadow-inner" placeholder="Comece a digitar aqui... Se colocar links de imagens ou sites, eles aparecerão organizados logo abaixo!"></textarea>
+            
+            <div class="flex justify-between items-center">
+                <span id="save-status" class="text-xs text-coffee-600 italic">Alterações salvas no aparelho</span>
+            </div>
+
+            <!-- Previews Dinâmicos de Imagens e Músicas -->
+            <div id="media-preview-container" class="space-y-3 pt-2">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-coffee-600">Mídias Detectadas nas Notas:</h3>
+                <div id="media-preview-grid" class="grid grid-cols-2 gap-2"></div>
+                <div id="links-preview-list" class="space-y-1"></div>
+            </div>
+        </div>
+
+        <!-- TELA 4: CHAT DE IDEIAS (Brainstorm) -->
+        <div id="screen-chat" class="hidden flex flex-col h-[70vh]">
+            <h2 class="text-lg font-bold text-coffee-950 mb-1">💡 Chat de Ideias</h2>
+            <p class="text-xs text-coffee-600 mb-3">Envie mensagens rápidas para organizar pensamentos soltos.</p>
+            
+            <div id="chat-box" class="flex-1 overflow-y-auto bg-coffee-100 p-4 rounded-3xl border border-coffee-200 space-y-3 mb-3 no-scrollbar shadow-inner">
+                <!-- Mensagens do chat -->
+            </div>
+
+            <div class="flex gap-2">
+                <input type="text" id="chat-input" class="flex-1 p-3 rounded-full bg-coffee-100 border border-coffee-200 focus:outline-none focus:ring-2 focus:ring-coffee-600 text-coffee-950 text-sm" placeholder="Escreva uma ideia...">
+                <button onclick="sendChatMessage()" class="bg-coffee-800 text-white p-3 rounded-full hover:bg-coffee-950 transition active:scale-95 shadow-md">
+                    <i data-lucide="send" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- TELA 5: CONFIGURAÇÕES & BACKUP -->
+        <div id="screen-settings" class="hidden space-y-6">
+            <h2 class="text-lg font-bold text-coffee-950">⚙️ Configurações & Segurança</h2>
+            <p class="text-xs text-coffee-600">Como seus dados ficam guardados apenas no seu navegador, faça um backup regularmente para nunca perder o progresso do seu livro.</p>
+            
+            <div class="space-y-3">
+                <!-- Exportar -->
+                <button onclick="exportBackup()" class="w-full bg-coffee-800 text-white font-bold py-4 px-6 rounded-2xl flex items-center justify-between hover:bg-coffee-950 active:scale-95 transition shadow-sm">
+                    <span class="flex items-center gap-2 text-sm"><i data-lucide="download-cloud"></i> Exportar Backup das Histórias</span>
+                    <i data-lucide="chevron-right"></i>
+                </button>
+
+                <!-- Importar -->
+                <label class="w-full bg-coffee-100 border border-coffee-300 text-coffee-800 font-bold py-4 px-6 rounded-2xl flex items-center justify-between hover:bg-coffee-200 active:scale-95 transition shadow-sm cursor-pointer">
+                    <span class="flex items-center gap-2 text-sm"><i data-lucide="upload-cloud"></i> Importar Backup</span>
+                    <input type="file" id="import-file" class="hidden" accept=".json" onchange="importBackup(event)">
+                    <i data-lucide="chevron-right"></i>
+                </label>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- BARRA DE NAVEGAÇÃO INFERIOR -->
+    <nav class="bg-coffee-100 border-t border-coffee-200 fixed bottom-0 left-0 right-0 max-w-md mx-auto p-3 flex justify-around items-center shadow-lg rounded-t-[2rem]">
+        <button onclick="navigateTo('home')" class="flex flex-col items-center text-coffee-800 hover:text-coffee-950 transition">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span class="text-[10px] mt-1 font-bold">Universo</span>
+        </button>
+        <button onclick="navigateTo('chat')" class="flex flex-col items-center text-coffee-800 hover:text-coffee-950 transition">
+            <i data-lucide="message-square-plus" class="w-5 h-5"></i>
+            <span class="text-[10px] mt-1 font-bold">Brainstorm</span>
+        </button>
+        <button onclick="navigateTo('settings')" class="flex flex-col items-center text-coffee-800 hover:text-coffee-950 transition">
+            <i data-lucide="settings" class="w-5 h-5"></i>
+            <span class="text-[10px] mt-1 font-bold">Backup</span>
+        </button>
+    </nav>
+
+    <!-- SCRIPT DO APLICATIVO -->
+    <script>
+        lucide.createIcons();
+
+        let currentCategory = "";
+        let currentSubcategory = "";
+
+        // Estrutura completa de categorias baseadas na imagem e na sua ideia
+        const dataStructure = {
+            "Personagem": {
+                "Fichas": "user",
+                "Backstory": "scroll",
+                "Músicas (Playlist)": "music",
+                "Imagens / Aparência": "image",
+                "Evolução (Arco)": "trending-up"
+            },
+            "Mundo": {
+                "Geografia / Mapa": "map-pin",
+                "Economia / Moeda": "coins",
+                "Cultura e Leis": "landmark",
+                "Magia / Tecnologia": "zap",
+                "Anotações": "file-text"
+            },
+            "História": {
+                "Capítulos": "book-open",
+                "Linha do Tempo": "calendar-days",
+                "Ideias Rápidas": "lightbulb"
+            }
+        };
+
+        function navigateTo(screenId) {
+            document.getElementById('screen-home').classList.add('hidden');
+            document.getElementById('screen-subcategories').classList.add('hidden');
+            document.getElementById('screen-editor').classList.add('hidden');
+            document.getElementById('screen-chat').classList.add('hidden');
+            document.getElementById('screen-settings').classList.add('hidden');
+            document.getElementById('back-btn').classList.add('hidden');
+
+            if (screenId === 'home') {
+                document.getElementById('screen-home').classList.remove('hidden');
+                document.getElementById('app-title').innerText = "Escritório Criativo";
+            } else if (screenId === 'chat') {
+                document.getElementById('screen-chat').classList.remove('hidden');
+                document.getElementById('app-title').innerText = "Ideias Rápidas";
+                loadChatMessages();
+            } else if (screenId === 'settings') {
+                document.getElementById('screen-settings').classList.remove('hidden');
+                document.getElementById('app-title').innerText = "Configurações";
+            }
+        }
+
+        function openCategory(category) {
+            currentCategory = category;
+            document.getElementById('screen-home').classList.add('hidden');
+            document.getElementById('screen-subcategories').classList.remove('hidden');
+            document.getElementById('back-btn').classList.remove('hidden');
+            document.getElementById('app-title').innerText = category;
+            document.getElementById('subcategory-title').innerText = `Menu: ${category}`;
+
+            const grid = document.getElementById('subcategories-grid');
+            grid.innerHTML = "";
+            
+            Object.keys(dataStructure[category]).forEach(sub => {
+                const icon = dataStructure[category][sub];
+                grid.innerHTML += `
+                    <button onclick="openEditor('${sub}')" class="bg-coffee-100 p-4 rounded-[1.5rem] border border-coffee-200 hover:bg-coffee-200 transition active:scale-95 flex flex-col items-center justify-center gap-3 h-32 shadow-sm">
+                        <div class="bg-coffee-800 p-2.5 rounded-2xl text-white">
+                            <i data-lucide="${icon}" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-xs text-coffee-950 text-center leading-tight">${sub}</span>
+                    </button>
+                `;
+            });
+            lucide.createIcons();
+        }
+
+        function openEditor(subcategory) {
+            currentSubcategory = subcategory;
+            document.getElementById('screen-subcategories').classList.add('hidden');
+            document.getElementById('screen-editor').classList.remove('hidden');
+            document.getElementById('editor-title').innerText = `${currentCategory} > ${subcategory}`;
+            
+            const savedKey = `storyapp_${currentCategory}_${currentSubcategory}`;
+            const savedContent = localStorage.getItem(savedKey) || "";
+            document.getElementById('editor-textarea').value = savedContent;
+            
+            updateMediaPreviews(savedContent);
+        }
+
+        // Salvamento automático para celular (evita perda se o app fechar do nada)
+        function autoSave() {
+            const content = document.getElementById('editor-textarea').value;
+            const savedKey = `storyapp_${currentCategory}_${currentSubcategory}`;
+            localStorage.setItem(savedKey, content);
+            
+            const status = document.getElementById('save-status');
+            status.innerText = "Salvando...";
+            setTimeout(() => {
+                status.innerText = "✓ Alterações salvas!";
+            }, 500);
+
+            updateMediaPreviews(content);
+        }
+
+        // Extrai e renderiza links de Imagem e links normais colados no texto
+        function updateMediaPreviews(text) {
+            const mediaGrid = document.getElementById('media-preview-grid');
+            const linksList = document.getElementById('links-preview-list');
+            mediaGrid.innerHTML = "";
+            linksList.innerHTML = "";
+
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            const urls = text.match(urlRegex) || [];
+
+            let foundMedia = false;
+
+            urls.forEach(url => {
+                // Se for formato de imagem comum
+                if (url.match(/\.(jpeg|jpg|gif|png|webp)/i) || url.includes("images.unsplash.com") || url.includes("pinterest.com/pin/")) {
+                    foundMedia = true;
+                    mediaGrid.innerHTML += `
+                        <div class="relative group rounded-2xl overflow-hidden border border-coffee-200">
+                            <img src="${url}" class="w-full h-32 object-cover" onerror="this.src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=200'">
+                            <a href="${url}" target="_blank" class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition text-white text-xs font-bold">Abrir Original</a>
+                        </div>
+                    `;
+                } else {
+                    // Links normais (músicas, playlists, referências)
+                    foundMedia = true;
+                    linksList.innerHTML += `
+                        <a href="${url}" target="_blank" class="flex items-center gap-2 p-2 rounded-xl bg-coffee-200/50 hover:bg-coffee-200 text-xs font-bold text-coffee-950 transition truncate">
+                            <i data-lucide="link" class="w-4 h-4 flex-shrink-0"></i>
+                            <span class="truncate">${url}</span>
+                        </a>
+                    `;
+                }
+            });
+
+            const container = document.getElementById('media-preview-container');
+            if (foundMedia) {
+                container.classList.remove('hidden');
+                lucide.createIcons();
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+
+        function goBack() {
+            if (!document.getElementById('screen-editor').classList.contains('hidden')) {
+                document.getElementById('screen-editor').classList.add('hidden');
+                document.getElementById('screen-subcategories').classList.remove('hidden');
+                document.getElementById('app-title').innerText = currentCategory;
+            } else if (!document.getElementById('screen-subcategories').classList.contains('hidden')) {
+                navigateTo('home');
+            }
+        }
+
+        /* SISTEMA DE CHAT DE PENSAMENTOS */
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const messages = JSON.parse(localStorage.getItem('storyapp_chat') || '[]');
+            const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            messages.push({ text, time: timestamp });
+            
+            localStorage.setItem('storyapp_chat', JSON.stringify(messages));
+            input.value = "";
+            loadChatMessages();
+        }
+
+        function loadChatMessages() {
+            const chatBox = document.getElementById('chat-box');
+            const messages = JSON.parse(localStorage.getItem('storyapp_chat') || '[]');
+            
+            if (messages.length === 0) {
+                chatBox.innerHTML = `<div class="text-center text-xs text-coffee-600 mt-10 italic">Nenhum pensamento registrado ainda. Digite suas sacadas de mestre abaixo! 💡</div>`;
+                return;
+            }
+
+            chatBox.innerHTML = messages.map(msg => `
+                <div class="flex flex-col items-end">
+                    <div class="bg-coffee-800 text-white px-4 py-3 rounded-3xl rounded-tr-none max-w-[85%] text-xs shadow-sm">
+                        ${msg.text}
+                    </div>
+                    <span class="text-[9px] text-
