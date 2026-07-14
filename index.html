@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Meu Universo Autoral</title>
+    <title>Clara's World</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         coffee: {
-                            50: '#FDFBF7',  /* Fundo creme ultra claro */
-                            100: '#F5EBE0', /* Creme suave */
-                            200: '#E3D5CA', /* Bege médio */
-                            300: '#D5BDAF', /* Tom de transição */
-                            600: '#9C6644', /* Marrom médio */
-                            800: '#7F5539', /* Café escuro */
-                            950: '#4A3728', /* Chocolate */
+                            50: '#FDFBF7',  
+                            100: '#F5EBE0', 
+                            200: '#E3D5CA', 
+                            300: '#D5BDAF', 
+                            600: '#9C6644', 
+                            800: '#7F5539', 
+                            950: '#4A3728', 
                         }
                     }
                 }
@@ -32,68 +32,61 @@
             color: #4A3728;
             -webkit-tap-highlight-color: transparent;
         }
-        /* Esconder barra de rolagem mas manter funcionalidade */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="flex flex-col h-screen max-w-md mx-auto shadow-2xl bg-coffee-50 border-x border-coffee-200 overflow-hidden">
 
-    <!-- HEADER (Topo) -->
     <header class="bg-coffee-100 p-4 flex items-center justify-between border-b border-coffee-200 sticky top-0 z-50">
         <div class="flex items-center gap-2">
-            <div class="bg-coffee-800 p-1.5 rounded-full text-white">
+            <div class="bg-coffee-800 p-1.5 rounded-full text-white flex items-center justify-center">
                 <i data-lucide="coffee" class="w-5 h-5"></i>
             </div>
-            <h1 class="font-bold text-lg text-coffee-950" id="app-title">Escritório Criativo</h1>
+            <h1 class="font-bold text-lg text-coffee-950" id="app-title">Workspace</h1>
         </div>
-        <button id="back-btn" class="hidden text-coffee-800 font-bold flex items-center gap-1 text-sm bg-coffee-200 px-3 py-1.5 rounded-full transition active:scale-95" onclick="goBack()">
+        <button id="back-btn" class="hidden text-coffee-800 font-bold flex items-center gap-1 text-sm bg-coffee-200 px-3 py-1.5 rounded-full transition active:scale-95 animate-fade-in" onclick="goBack()">
             <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar
         </button>
     </header>
 
-    <!-- ÁREA DE CONTEÚDO (Rolável) -->
     <main class="flex-1 overflow-y-auto p-4 pb-24 no-scrollbar">
         
-        <!-- TELA 1: CATEGORIAS PRINCIPAIS -->
         <div id="screen-home" class="space-y-6">
             <div class="text-center py-4">
-                <p class="text-xs text-coffee-600 italic">"Café quente, mente aberta. O que vamos criar hoje?"</p>
+                <p class="text-xs text-coffee-600 italic">"Is it better to speak or to die?"</p>
             </div>
             
             <div class="grid grid-cols-1 gap-4">
-                <!-- Personagens -->
                 <button onclick="openCategory('Personagem')" class="bg-coffee-100 p-5 rounded-[2rem] border border-coffee-200 text-left flex items-center justify-between hover:bg-coffee-200 transition active:scale-95 shadow-sm">
                     <div class="flex items-center gap-4">
-                        <div class="bg-coffee-800 p-3.5 rounded-2xl text-white">
+                        <div class="bg-coffee-800 w-12 h-12 rounded-2xl text-white flex items-center justify-center">
                             <i data-lucide="user" class="w-6 h-6"></i>
                         </div>
                         <div>
                             <h3 class="font-bold text-base text-coffee-950">Personagens</h3>
-                            <p class="text-xs text-coffee-600">Backstory, aparências e músicas</p>
+                            <p class="text-xs text-coffee-600">Backstory, dados, aparências e músicas</p>
                         </div>
                     </div>
                     <i data-lucide="chevron-right" class="text-coffee-600"></i>
                 </button>
 
-                <!-- Mundo (Lore) -->
                 <button onclick="openCategory('Mundo')" class="bg-coffee-100 p-5 rounded-[2rem] border border-coffee-200 text-left flex items-center justify-between hover:bg-coffee-200 transition active:scale-95 shadow-sm">
                     <div class="flex items-center gap-4">
-                        <div class="bg-coffee-800 p-3.5 rounded-2xl text-white">
+                        <div class="bg-coffee-800 w-12 h-12 rounded-2xl text-white flex items-center justify-center">
                             <i data-lucide="globe" class="w-6 h-6"></i>
                         </div>
                         <div>
                             <h3 class="font-bold text-base text-coffee-950">Mundo (Lore)</h3>
-                            <p class="text-xs text-coffee-600">Economia, geografia e cultura</p>
+                            <p class="text-xs text-coffee-600">Economia, geografia, governo e cultura</p>
                         </div>
                     </div>
                     <i data-lucide="chevron-right" class="text-coffee-600"></i>
                 </button>
 
-                <!-- História -->
                 <button onclick="openCategory('História')" class="bg-coffee-100 p-5 rounded-[2rem] border border-coffee-200 text-left flex items-center justify-between hover:bg-coffee-200 transition active:scale-95 shadow-sm">
                     <div class="flex items-center gap-4">
-                        <div class="bg-coffee-800 p-3.5 rounded-2xl text-white">
+                        <div class="bg-coffee-800 w-12 h-12 rounded-2xl text-white flex items-center justify-center">
                             <i data-lucide="book-open" class="w-6 h-6"></i>
                         </div>
                         <div>
@@ -106,62 +99,45 @@
             </div>
         </div>
 
-        <!-- TELA 2: SUBCATEGORIAS -->
-        <div id="screen-subcategories" class="hidden space-y-4">
+        <div id="screen-subcategories" class="hidden space-y-4 animate-fade-in">
             <h2 class="text-lg font-bold text-coffee-950 mb-2" id="subcategory-title">Subcategorias</h2>
-            <div class="grid grid-cols-2 gap-3" id="subcategories-grid">
-                <!-- Inserido dinamicamente -->
-            </div>
+            <div class="grid grid-cols-2 gap-3" id="subcategories-grid"></div>
         </div>
 
-        <!-- TELA 3: EDITOR DE CONTEÚDO (Texto, Mídias e Links) -->
-        <div id="screen-editor" class="hidden space-y-4">
+        <div id="screen-editor" class="hidden space-y-4 animate-fade-in">
             <h2 class="text-lg font-bold text-coffee-950" id="editor-title">Anotações</h2>
-            
-            <textarea id="editor-textarea" oninput="autoSave()" class="w-full h-80 p-4 rounded-3xl bg-coffee-100 border border-coffee-200 focus:outline-none focus:ring-2 focus:ring-coffee-600 text-coffee-950 placeholder-coffee-600 text-sm shadow-inner" placeholder="Comece a digitar aqui... Se colocar links de imagens ou sites, eles aparecerão organizados logo abaixo!"></textarea>
-            
+            <textarea id="editor-textarea" oninput="autoSave()" class="w-full h-80 p-4 rounded-3xl bg-coffee-100 border border-coffee-200 focus:outline-none focus:ring-2 focus:ring-coffee-600 text-coffee-950 placeholder-coffee-600 text-sm shadow-inner" placeholder="Comece a digitar aqui... Se colocar links de imagens, eles aparecerão organizados logo abaixo!"></textarea>
             <div class="flex justify-between items-center">
                 <span id="save-status" class="text-xs text-coffee-600 italic">Alterações salvas no aparelho</span>
             </div>
 
-            <!-- Previews Dinâmicos de Imagens e Músicas -->
-            <div id="media-preview-container" class="space-y-3 pt-2">
-                <h3 class="font-bold text-xs uppercase tracking-wider text-coffee-600">Mídias Detectadas nas Notas:</h3>
+            <div id="media-preview-container" class="space-y-3 pt-2 hidden">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-coffee-600">Mídias Detectadas:</h3>
                 <div id="media-preview-grid" class="grid grid-cols-2 gap-2"></div>
                 <div id="links-preview-list" class="space-y-1"></div>
             </div>
         </div>
 
-        <!-- TELA 4: CHAT DE IDEIAS (Brainstorm) -->
-        <div id="screen-chat" class="hidden flex flex-col h-[70vh]">
+        <div id="screen-chat" class="hidden flex flex-col h-[70vh] animate-fade-in">
             <h2 class="text-lg font-bold text-coffee-950 mb-1">💡 Chat de Ideias</h2>
             <p class="text-xs text-coffee-600 mb-3">Envie mensagens rápidas para organizar pensamentos soltos.</p>
-            
-            <div id="chat-box" class="flex-1 overflow-y-auto bg-coffee-100 p-4 rounded-3xl border border-coffee-200 space-y-3 mb-3 no-scrollbar shadow-inner">
-                <!-- Mensagens do chat -->
-            </div>
-
+            <div id="chat-box" class="flex-1 overflow-y-auto bg-coffee-100 p-4 rounded-3xl border border-coffee-200 space-y-3 mb-3 no-scrollbar shadow-inner"></div>
             <div class="flex gap-2">
                 <input type="text" id="chat-input" class="flex-1 p-3 rounded-full bg-coffee-100 border border-coffee-200 focus:outline-none focus:ring-2 focus:ring-coffee-600 text-coffee-950 text-sm" placeholder="Escreva uma ideia...">
-                <button onclick="sendChatMessage()" class="bg-coffee-800 text-white p-3 rounded-full hover:bg-coffee-950 transition active:scale-95 shadow-md">
+                <button onclick="sendChatMessage()" class="bg-coffee-800 text-white p-3 rounded-full hover:bg-coffee-950 transition active:scale-95 shadow-md flex items-center justify-center">
                     <i data-lucide="send" class="w-5 h-5"></i>
                 </button>
             </div>
         </div>
 
-        <!-- TELA 5: CONFIGURAÇÕES & BACKUP -->
-        <div id="screen-settings" class="hidden space-y-6">
+        <div id="screen-settings" class="hidden space-y-6 animate-fade-in">
             <h2 class="text-lg font-bold text-coffee-950">⚙️ Configurações & Segurança</h2>
             <p class="text-xs text-coffee-600">Como seus dados ficam guardados apenas no seu navegador, faça um backup regularmente para nunca perder o progresso do seu livro.</p>
-            
             <div class="space-y-3">
-                <!-- Exportar -->
                 <button onclick="exportBackup()" class="w-full bg-coffee-800 text-white font-bold py-4 px-6 rounded-2xl flex items-center justify-between hover:bg-coffee-950 active:scale-95 transition shadow-sm">
                     <span class="flex items-center gap-2 text-sm"><i data-lucide="download-cloud"></i> Exportar Backup das Histórias</span>
                     <i data-lucide="chevron-right"></i>
                 </button>
-
-                <!-- Importar -->
                 <label class="w-full bg-coffee-100 border border-coffee-300 text-coffee-800 font-bold py-4 px-6 rounded-2xl flex items-center justify-between hover:bg-coffee-200 active:scale-95 transition shadow-sm cursor-pointer">
                     <span class="flex items-center gap-2 text-sm"><i data-lucide="upload-cloud"></i> Importar Backup</span>
                     <input type="file" id="import-file" class="hidden" accept=".json" onchange="importBackup(event)">
@@ -172,7 +148,6 @@
 
     </main>
 
-    <!-- BARRA DE NAVEGAÇÃO INFERIOR -->
     <nav class="bg-coffee-100 border-t border-coffee-200 fixed bottom-0 left-0 right-0 max-w-md mx-auto p-3 flex justify-around items-center shadow-lg rounded-t-[2rem]">
         <button onclick="navigateTo('home')" class="flex flex-col items-center text-coffee-800 hover:text-coffee-950 transition">
             <i data-lucide="home" class="w-5 h-5"></i>
@@ -188,14 +163,11 @@
         </button>
     </nav>
 
-    <!-- SCRIPT DO APLICATIVO -->
     <script>
-        lucide.createIcons();
-
         let currentCategory = "";
         let currentSubcategory = "";
 
-        // Estrutura completa de categorias baseadas na imagem e na sua ideia
+        // Estrutura de categorias com nomes de ícones do Lucide
         const dataStructure = {
             "Personagem": {
                 "Fichas": "user",
@@ -218,6 +190,19 @@
             }
         };
 
+        // Função de renderização segura (Se der erro ao carregar o ícone na rede, o app não quebra)
+        function safeRenderIcons() {
+            try {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                } else {
+                    console.warn("Lucide CDN ainda não carregou ou foi bloqueada.");
+                }
+            } catch (error) {
+                console.error("Erro ao renderizar ícones:", error);
+            }
+        }
+
         function navigateTo(screenId) {
             document.getElementById('screen-home').classList.add('hidden');
             document.getElementById('screen-subcategories').classList.add('hidden');
@@ -237,6 +222,7 @@
                 document.getElementById('screen-settings').classList.remove('hidden');
                 document.getElementById('app-title').innerText = "Configurações";
             }
+            safeRenderIcons();
         }
 
         function openCategory(category) {
@@ -254,14 +240,14 @@
                 const icon = dataStructure[category][sub];
                 grid.innerHTML += `
                     <button onclick="openEditor('${sub}')" class="bg-coffee-100 p-4 rounded-[1.5rem] border border-coffee-200 hover:bg-coffee-200 transition active:scale-95 flex flex-col items-center justify-center gap-3 h-32 shadow-sm">
-                        <div class="bg-coffee-800 p-2.5 rounded-2xl text-white">
+                        <div class="bg-coffee-800 w-10 h-10 rounded-xl text-white flex items-center justify-center">
                             <i data-lucide="${icon}" class="w-5 h-5"></i>
                         </div>
                         <span class="font-bold text-xs text-coffee-950 text-center leading-tight">${sub}</span>
                     </button>
                 `;
             });
-            lucide.createIcons();
+            safeRenderIcons();
         }
 
         function openEditor(subcategory) {
@@ -275,9 +261,9 @@
             document.getElementById('editor-textarea').value = savedContent;
             
             updateMediaPreviews(savedContent);
+            safeRenderIcons();
         }
 
-        // Salvamento automático para celular (evita perda se o app fechar do nada)
         function autoSave() {
             const content = document.getElementById('editor-textarea').value;
             const savedKey = `storyapp_${currentCategory}_${currentSubcategory}`;
@@ -292,7 +278,6 @@
             updateMediaPreviews(content);
         }
 
-        // Extrai e renderiza links de Imagem e links normais colados no texto
         function updateMediaPreviews(text) {
             const mediaGrid = document.getElementById('media-preview-grid');
             const linksList = document.getElementById('links-preview-list');
@@ -305,8 +290,7 @@
             let foundMedia = false;
 
             urls.forEach(url => {
-                // Se for formato de imagem comum
-                if (url.match(/\.(jpeg|jpg|gif|png|webp)/i) || url.includes("images.unsplash.com") || url.includes("pinterest.com/pin/")) {
+                if (url.match(/\.(jpeg|jpg|gif|png|webp)/i) || url.includes("images.unsplash.com") || url.includes("pinterest.com")) {
                     foundMedia = true;
                     mediaGrid.innerHTML += `
                         <div class="relative group rounded-2xl overflow-hidden border border-coffee-200">
@@ -315,7 +299,6 @@
                         </div>
                     `;
                 } else {
-                    // Links normais (músicas, playlists, referências)
                     foundMedia = true;
                     linksList.innerHTML += `
                         <a href="${url}" target="_blank" class="flex items-center gap-2 p-2 rounded-xl bg-coffee-200/50 hover:bg-coffee-200 text-xs font-bold text-coffee-950 transition truncate">
@@ -329,7 +312,7 @@
             const container = document.getElementById('media-preview-container');
             if (foundMedia) {
                 container.classList.remove('hidden');
-                lucide.createIcons();
+                safeRenderIcons();
             } else {
                 container.classList.add('hidden');
             }
@@ -343,9 +326,9 @@
             } else if (!document.getElementById('screen-subcategories').classList.contains('hidden')) {
                 navigateTo('home');
             }
+            safeRenderIcons();
         }
 
-        /* SISTEMA DE CHAT DE PENSAMENTOS */
         function sendChatMessage() {
             const input = document.getElementById('chat-input');
             const text = input.value.trim();
@@ -365,7 +348,7 @@
             const messages = JSON.parse(localStorage.getItem('storyapp_chat') || '[]');
             
             if (messages.length === 0) {
-                chatBox.innerHTML = `<div class="text-center text-xs text-coffee-600 mt-10 italic">Nenhum pensamento registrado ainda. Digite suas sacadas de mestre abaixo! 💡</div>`;
+                chatBox.innerHTML = `<div class="text-center text-xs text-coffee-600 mt-10 italic">Nenhum pensamento registrado ainda. Digite algo abaixo! 💡</div>`;
                 return;
             }
 
@@ -374,4 +357,18 @@
                     <div class="bg-coffee-800 text-white px-4 py-3 rounded-3xl rounded-tr-none max-w-[85%] text-xs shadow-sm">
                         ${msg.text}
                     </div>
-                    <span class="text-[9px] text-
+                    <span class="text-[9px] text-coffee-600 mr-2 mt-1 font-bold">${msg.time}</span>
+                </div>
+            `).join('');
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function exportBackup() {
+            const backupData = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('storyapp_')) {
+                    backupData[key] = localStorage.getItem(key);
+                }
+            }
+       
